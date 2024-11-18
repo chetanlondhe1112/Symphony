@@ -1,2 +1,2 @@
-# llm_training
+# Symphony
 Training LLM Models
