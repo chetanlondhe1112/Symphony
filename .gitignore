@@ -6,6 +6,9 @@ __pycache__/
 # C extensions
 *.so
 
+# env
+lc_env
+
 # Projects files and folder
 conf.toml
 dataset
