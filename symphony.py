@@ -24,18 +24,19 @@ app = FastAPI(title="Symphony : Retrieval-Augmented Generation Application Servi
     })
 
 script_dir = os.getcwd()
-config_path = os.path.join(script_dir, "conf\\conf.toml")
+config_path = os.path.join(script_dir, "conf/conf.toml")
 
 config = toml.load(config_path)
 
-log_path = os.path.join(script_dir, "log\\symphony_log.log")
+log_path = os.path.join(script_dir, "log/symphony_log.log")
 logger.add(log_path)
 
 router = APIRouter()
 
 # Setting up the SQL Database Connection
 logger.info("Loading Database")
-db = SQLDatabase.from_uri("mysql://root:@localhost:3306/arnoldtest")
+db_config=config['database']['cred']
+db = SQLDatabase.from_uri(f"mysql://{db_config['username']}:{db_config['password']}@{db_config['host']}:{db_config['port']}/{db_config['database']}")
 logger.info("Done")
 
 gemini_api_key = config['llm']['llm_api_key']
